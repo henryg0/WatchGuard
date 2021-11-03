@@ -1,7 +1,11 @@
-import HeartRateSensor;
+package src;
+import src.HeartRateSensor;
 
 class App {
     public static void main() {
-        HeartRateSensor heartRateSensor = new HeartRateSensor();
+        // calibrate UART
+        // assign ports to each sensor
+        int heartRateSensorPort = 0;
+        HeartRateSensor heartRateSensor = new HeartRateSensor(heartRateSensorPort);
     }
 }

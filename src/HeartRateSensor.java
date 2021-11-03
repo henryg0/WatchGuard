@@ -1,14 +1,17 @@
+package src;
 import java.util.ArrayList;
+import java.util.List;
+import src.Sensor;
 
-public class HeartRateSensor {
-    int PORT_NUMBER = null;
-    public HeartRateSensor() {
-        // calibrate
+public class HeartRateSensor extends Sensor {
+    public HeartRateSensor(int portNumber) {
+        super(portNumber);
     }
 
     public int getHeartRate() {
         // read from UART sensor
-        return null;
+        // update database w/ new reading
+        return 0;
     }
 
     public int getAvgHeartRate() {
@@ -20,6 +23,5 @@ public class HeartRateSensor {
         }
         return res / heartRateReadings.size();
     }
-
 
 }
