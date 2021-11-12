@@ -1,7 +1,8 @@
-package src;
+package watchguard;
+
 import java.util.ArrayList;
 import java.util.List;
-import src.Sensor;
+import watchguard.Sensor;
 
 public class HeartRateSensor extends Sensor {
     public HeartRateSensor(int portNumber) {
