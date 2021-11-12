@@ -1,4 +1,4 @@
-package src;
+package watchguard;
 
 public abstract class Sensor {
   int PORT_NUMBER;

@@ -1,9 +1,10 @@
-package src;
-import src.HeartRateSensor;
+package watchguard.gui;
+
+import watchguard.HeartRateSensor;
 import javax.swing.JFrame;
 
 class App {
-    public static void main() {
+    public static void main(String[] args) {
         // calibrate UART
         // assign ports to each sensor
         int heartRateSensorPort = 0;
