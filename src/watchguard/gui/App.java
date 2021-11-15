@@ -2,6 +2,7 @@ package watchguard.gui;
 
 import watchguard.HeartRateSensor;
 import javax.swing.JFrame;
+import java.awt.Dimension;
 
 class App {
     public static void main(String[] args) {
@@ -15,10 +16,17 @@ class App {
             }
         });
     }
+
     private static void startGUI() {
         JFrame jf = new JFrame("WatchGuard");
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jf.setMinimumSize(new Dimension(640, 480));
+
+        jf.add(new ProfileCard());
+
         jf.pack();
+
+        jf.setLocationRelativeTo(null);
         jf.setVisible(true);
     }
 }
