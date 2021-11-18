@@ -2,33 +2,40 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     
-    <groupId>_groupId_</groupId>
+    <groupId>com.responderhelpers</groupId>
     <artifactId>WatchGuard</artifactId>
     <version>1.0</version>
 
-    <!-- Put dependencies in here -->
     <dependencies>
 
     </dependencies>
 
-    <!-- Build settings -->
     <build>
-        <!-- This is the name of the .jar file -->
-        <finalName>WatchGuardCentral</finalName>
+        <finalName>WatchGuardControl</finalName>
         <sourceDirectory>src</sourceDirectory>
 
         <plugins>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <!-- I believe this is the java version to be compiled with -->
                     <release>11</release>
                 </configuration>
             </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>watchguard.gui.App</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
