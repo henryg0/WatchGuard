@@ -1,4 +1,4 @@
-package watchguard;
+package watchguard.sensors;
 
 import java.util.List;
 

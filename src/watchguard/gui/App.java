@@ -1,10 +1,15 @@
 package watchguard.gui;
 
-import watchguard.HeartRateSensor;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import java.awt.GridLayout;
+import watchguard.sensors.HeartRateSensor;
+
 import java.awt.Dimension;
 
 class App {
+    private static final int NUM_PROFILES = 6;
     public static void main(String[] args) {
         // calibrate UART
         // assign ports to each sensor
@@ -22,8 +27,13 @@ class App {
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jf.setMinimumSize(new Dimension(640, 480));
 
-        jf.add(new ProfileCard());
+        JPanel profilePanel = new JPanel();
+        profilePanel.setLayout(new GridLayout(0,3, 10, 10));
 
+        for (int i = 0; i < NUM_PROFILES; i++ ) { 
+            profilePanel.add(new ProfileCard());
+        }
+        jf.add(profilePanel);
         jf.pack();
 
         jf.setLocationRelativeTo(null);

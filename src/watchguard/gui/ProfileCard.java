@@ -54,7 +54,7 @@ public class ProfileCard extends JPanel {
         add(this.footerPanel, BorderLayout.PAGE_END);
 
         // Set intiial values
-        this.profileName = "";
+        this.profileName = "N/A";
         this.profileId = -1;
 
         setName(this.profileName);
@@ -67,7 +67,7 @@ public class ProfileCard extends JPanel {
      */
     public void setName(String name) {
         profileName = name;
-        profileDisplayLabel.setText(String.format("%s (id: %d)", profileName, profileId));
+        updateNameAndId();
     }
 
     /**
@@ -84,7 +84,7 @@ public class ProfileCard extends JPanel {
      */
     public void setId(int id) {
         profileId = id;
-        profileDisplayLabel.setText(String.format("%s (id: %d)", profileName, profileId));
+        updateNameAndId();
     }
 
     /**
@@ -182,8 +182,11 @@ public class ProfileCard extends JPanel {
         root.setBorder(BorderFactory.createLineBorder(new Color(0, 255, 0), 2));
 
         JButton thing = new JButton("Placeholder Center Component");
+        // set names as sensor data labels
+        // i.e heartRateLabel
         JLabel label1 = new JLabel("Placeholder Label 1");
         JLabel label2 = new JLabel("Placeholder Label 2");
+        // change to labels so user can't edit
         JTextField label3 = new JTextField("Placeholder");
         JTextField label4 = new JTextField("Placeholder");
 
@@ -276,5 +279,9 @@ public class ProfileCard extends JPanel {
         newNameButton.setText(CHANGE_NAME_STR);
         newNameField.setText("");
         displayNewNameComponents(false);
+    }
+
+    private void updateNameAndId() {
+        profileDisplayLabel.setText(String.format("name: %s (id: %d)", profileName, profileId));
     }
 }
