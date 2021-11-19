@@ -4,11 +4,13 @@ import java.awt.Color;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.GridBagConstraints;
 import javax.swing.GroupLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 /**
@@ -30,6 +32,7 @@ public class ProfileCard extends JPanel {
     private JTextField newNameField;
     private JButton newNameButton;
     private JButton setNameButton;
+    private JButton expandButton;
 
     // Card content components (assigned in createCardContent())
     private JPanel contentPanel;
@@ -40,6 +43,10 @@ public class ProfileCard extends JPanel {
 
     public ProfileCard() {
         super();
+        
+        // Set initial values
+        this.profileName = "N/A";
+        this.profileId = -1;
 
         // Initialize and assign all the components
         initHeaderPanel();
@@ -52,10 +59,6 @@ public class ProfileCard extends JPanel {
         add(this.headerPanel, BorderLayout.PAGE_START);
         add(this.contentPanel, BorderLayout.CENTER);
         add(this.footerPanel, BorderLayout.PAGE_END);
-
-        // Set intiial values
-        this.profileName = "N/A";
-        this.profileId = -1;
 
         setName(this.profileName);
         setId(this.profileId);
@@ -179,16 +182,18 @@ public class ProfileCard extends JPanel {
 
     private void initContentPanel() {
         JPanel root = new JPanel();
+        GridBagConstraints c = new GridBagConstraints();
         root.setBorder(BorderFactory.createLineBorder(new Color(0, 255, 0), 2));
-
-        JButton thing = new JButton("Placeholder Center Component");
+        // add button to expand profile w/ graphs of metrics
+        this.expandButton = new JButton(String.format("%s's metrics", profileName));
         // set names as sensor data labels
         // i.e heartRateLabel
-        JLabel label1 = new JLabel("Placeholder Label 1");
-        JLabel label2 = new JLabel("Placeholder Label 2");
+        JLabel heartRateLabel = new JLabel("heart rate:");
+        JLabel carbonLabel = new JLabel("carbon monoxide reading:");
         // change to labels so user can't edit
         JTextField label3 = new JTextField("Placeholder");
         JTextField label4 = new JTextField("Placeholder");
+        this.expandButton.addActionListener(this::handleExpandProfile);
 
         GroupLayout layout = new GroupLayout(root);
         root.setLayout(layout);
@@ -197,11 +202,11 @@ public class ProfileCard extends JPanel {
         layout.setAutoCreateGaps(true);
 
         GroupLayout.ParallelGroup hGroup = layout.createParallelGroup();
-        hGroup.addComponent(thing);
+        hGroup.addComponent(this.expandButton);
         hGroup.addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup()
-                        .addComponent(label1)
-                        .addComponent(label2)
+                        .addComponent(heartRateLabel)
+                        .addComponent(carbonLabel)
                 )
                 .addGroup(layout.createParallelGroup()
                         .addComponent(label3)
@@ -210,13 +215,13 @@ public class ProfileCard extends JPanel {
         );
 
         GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
-        vGroup.addComponent(thing);
-        vGroup.addGroup(layout.createParallelGroup()
-                .addComponent(label1)
+        vGroup.addComponent(this.expandButton);
+        vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                .addComponent(heartRateLabel)
                 .addComponent(label3)
         );
         vGroup.addGroup(layout.createParallelGroup()
-                .addComponent(label2)
+                .addComponent(carbonLabel)
                 .addComponent(label4)
         );
 
@@ -274,8 +279,9 @@ public class ProfileCard extends JPanel {
         if (newNameField.getText().isBlank()) {
             return;
         }
-
-        setName(newNameField.getText());
+        String newName = newNameField.getText();
+        setName(newName);
+        updateExpandButton(newName);
         newNameButton.setText(CHANGE_NAME_STR);
         newNameField.setText("");
         displayNewNameComponents(false);
@@ -283,5 +289,27 @@ public class ProfileCard extends JPanel {
 
     private void updateNameAndId() {
         profileDisplayLabel.setText(String.format("name: %s (id: %d)", profileName, profileId));
+    }
+
+    private void updateExpandButton(String newName) {
+        this.expandButton.setText(String.format("%s's metrics", newName));
+    }
+
+    private void handleExpandProfile(ActionEvent e) {
+        // createNewFrame
+        createProfileFrame();
+    }
+
+    private void createProfileFrame() {
+        JFrame profileFrame = new JFrame("Test");
+        JPanel testPanel = new JPanel();
+        JLabel testLabel = new JLabel("hello world");
+        testPanel.add(testLabel);
+        profileFrame.add(testPanel);
+        profileFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        profileFrame.pack();
+        profileFrame.setLocationByPlatform(true);
+        profileFrame.setVisible(true);
+        profileFrame.setResizable(false);
     }
 }
